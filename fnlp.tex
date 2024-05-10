@@ -10,9 +10,30 @@
 \usepackage{mathtools}
 \usepackage{graphicx}  % For including images
 \usepackage{enumitem}
+% \usepackage{savetrees}
 \linespread{0.8} % 1.5x line spacing
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
+
+% Reduce space between sections and subsections
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*0}{*0}  % Zero spacing for sections
+\titlespacing{\subsection}{0pt}{*0}{*0}  % Zero spacing for subsections
+\titlespacing{\subsubsection}{0pt}{*0}{*0}  % Zero spacing for subsections
+
+% Reduce line spacing
+\usepackage{setspace}
+\setstretch{0.9}  % Slightly less than single spacing
+
+% Reduce paragraph spacing
+\usepackage{parskip}
+\setlength{\parskip}{0pt}  % No extra spacing between paragraphs
+\setlength{\parindent}{0pt}  % No paragraph indentation
+
+% Compact itemize and enumerate lists
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}  % No space between items in itemize lists
+\setlist[enumerate]{noitemsep}  % No space between items in enumerate lists
 
 
 
@@ -20,7 +41,8 @@
 
 \begin{document}
 \begin{multicols*}{3}
-\textbf{Semantic Ambiguity}\\
+
+\subsubsection*{Semantic Ambiguity}
 Same trees have different meaning
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item \textit{Discourse}: The meeting is cancelled. Nicholas isn't coming into the office today.
@@ -28,30 +50,26 @@ Same trees have different meaning
     \item \textit{Quantifier scope}: Every child loves some movie
 \end{itemize}
 
-\textbf{Structural (syntactic) Ambiguity}\\
+\subsubsection*{Structural (syntactic) Ambiguity}
 Different trees produce the same sentence. \\
-POS ambiguities:
+
+\underline{POS ambiguities}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item \textit{Homophones}: blew and blue (particularly in speech)
     \item \textit{Homonyms}: chair (noun or verb)
 \end{itemize}
-Attachement ambiguities:
+\underline{Attachement ambiguities}:
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-    \item \textit{PP-attachement}: I saw a girl with a telescope
+    \item \textit{PP-attachement}: I saw a girl with a telescope\\
+$n$ preposition phrases have \\$\operatorname{Cat}_n = \left(\begin{array}{c}2 n \\ n\end{array}\right)-\left(\begin{array}{c}2 n \\ n-1\end{array}\right) \approx \frac{4^n}{n^{3 / 2} \sqrt{\pi}}$ different parses.\\
     \item \textit{Reference}: John dropped the goblet onto the glass table and it broke
 \end{itemize}
 
-\textbf{PP-Attachement}\\
-Attachement ambiguities are unique because they can occur without POS ambiguity. 
-\textit{Put the block \underline{in the box} \underline{on the table} \underline{in the kitchen}.}
-\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-\item \textit{Put the block ((in the box on the table) in the kitchen)}
-\item \textit{Put the block (in the box (on the table in the kitchen))}
-\item \textit{Put ((the block in the box) on the table) in the kitchen}
-\end{itemize}
-$n$ preposition phrases have \\$\operatorname{Cat}_n = \left(\begin{array}{c}2 n \\ n\end{array}\right)-\left(\begin{array}{c}2 n \\ n-1\end{array}\right) \approx \frac{4^n}{n^{3 / 2} \sqrt{\pi}}$ different parses.\\
+\begin{center}
+    \includegraphics[width=0.3\textwidth]{media/girl.png}
+\end{center}
 
-\textbf{Variability}\\
+\subsubsection*{Variability}
 Multiple different sentences can have the same meaning. 
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item He drew the house
@@ -59,19 +77,16 @@ Multiple different sentences can have the same meaning.
     \item He portrayed the house in his paintings
 \end{itemize}
 
-\textbf{Zipf's Law}\\
+\subsubsection*{Zipf's Law}
 Infrequent words will make up the significant majority of the corpora.
 For this reason models have to estimate probabilities for things we rarely or never see in training.
 $$f\times r\approx k$$
 $$\log f = \log k - \log r$$
 - $f$ : frequency of a word\\
 - $r$ : rank of a word (if sorted by frequency)\\
-- $k$ : constant\\
-\begin{center}
-    \includegraphics[width=0.3\textwidth]{media/Pasted image 20240118144339.png}
-\end{center}
+- $k$ : constant
 
-\textbf{Checking for Constiuency}\\
+\subsubsection*{Checking for Constiuency}
 These are groups of words or phrases that can
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
 \item be used with conjunction words like and, or, and but. (e.g. washed and peeled)
@@ -79,9 +94,9 @@ These are groups of words or phrases that can
 \item appear in the frame "$\_\_\_\_$ is/are/who/what/\\where/when/why/how \ldots'' e.g.
 \end{itemize}   
 \textit{They put the boxes} in the basement.\\
-In the basement is where \textit{they put the boxes}. \\
+In the basement is where \textit{they put the boxes}. 
 
-\textbf{Other Reasons}
+\subsubsection*{Other Reasons}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
 \item Context Dependence
 \item Unknown representation
@@ -96,19 +111,11 @@ Language is not determinsitic hence FSMs and CYK are useful.
     \item Genre (news, fiction, scientific)
     \item Audience (formality, complexity)
 \end{itemize}
-Important to choose a corpus relevant to the task.\\
+Important to choose a corpus relevant to the task.
 
-\textbf{Human Annotation / Gold Lables}\\
+\subsubsection*{Human Annotation / Gold Lables}
 Often included in the \textit{metadata} of a corpus.\\
-Ofted used as \textbf{gold labels}, the best possible labels for a corpus. Gold labels are not always perfect, sources of errors include:
-\begin{itemize}[label=-, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-\item Simple error (hitting the wrong button) 
-\item Not reading the full context 
-\item Not noticing an erroneous pre-annotation 
-\item Forgetting a detail from the guidelines 
-\item Cases not anticipated by or not fully specified in guidelines (room for interpretation)
-\item Ambiguity
-\end{itemize}
+Ofted used as \textbf{gold labels}, the best possible labels for a corpus. Gold labels are not always perfect people make mistakes.
 To resolve we must consider
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item Inter-annotator agreement
@@ -116,32 +123,54 @@ To resolve we must consider
     \item Annotation tools
 \end{itemize}
 
-\textbf{Sentiment Lexicon}\\
-A list of words with their associated sentiment (good / bad). Used as a tool in sentiment analysis, issues include ambiguity, sarcasm, context dependence. 
-
-\textbf{Normalization/Pre-processing}
-\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-    \item Tokenization
-    \item Lowercasing
-    \item Stopword removal
-    \item Stemming
-    \item Punctuation removal
-    \item Spelling correction
-    \item Sentence splitting
-    \item Part of speech tagging
-    \item Named entity recognition
-    \item Parsing
-\end{itemize}
+\textbf{Sentiment Lexicon} is a list of words with their associated sentiment (good / bad). Used as a tool in sentiment analysis, issues include ambiguity, sarcasm, context dependence. 
 
 \subsection*{Parsing}
-\textbf{Treebank PCFGs}
-\textit{disadvantage}: Do not ecnode lexical preferences, do not encode structural properties beyond single rules.
+\subsubsection*{Converting CFG to CNF}
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+\item Get rid of empty (aka epsilon) productions:$C\rightarrow \epsilon$
+\item Get rid of unary rules:$C\rightarrow C_1$, 
+\item Break up rules w/ n>2 tags to expand into. (Binarisation) \\
+For example, $NP \rightarrow DT\quad NNP\quad VBG$ expanded into the two rules $NP \rightarrow DT\quad NNP\mid VBG$ and $NNP\mid VBG\rightarrow NNP \quad VBG$. 
+\end{itemize}
 
-\textbf{Vanilla PCFGS} No lexical dependencies, Replacing one word with another with the same POS will never result in a different parsing decision, even though it should!
+\subsubsection*{Treebank PCFGs Disadvantages}
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+\item Do not ecnode lexical preferences
+\item Do not encode structural properties beyond single rules.
+\item Close attachement is usually more likely (at least in Penn tree bank) (a PP has attached to the closest possible preceding NP) 
+\item No lexical dependencies, Replacing one word with another with the same POS will never result in a different parsing decision.
+\end{itemize}
 
+\subsubsection*{Fixing PCFGs}
+In vertical Markovization we increased context, in horizontal Markovization we want to reduce it.
+
+\underline{Vertical Markovisation}\\
+An approach to enrich grammar. 
+Helps PCFGs prioritise different structures such as close attachment over other attachments by giving the extra rules different probabilities depending on ancestors. 
+Rule applications depend on past ancestors in the tree (not only parents). 
+Improves accuracy.
+Example is of vertical order 2. 
+
+\underline{Lexicalisation}\\
+Makes grammar more specific but grammar blows up + sparse data. Need to do complex smoothing or increasing emphasis on automatically learned subcategories. 
+
+\begin{center}
+    \includegraphics*[width=0.3\textwidth]{media/markovisation.png}
+\end{center}
+
+\underline{Lexicalised Constituency Parse}\\
+Take lexicalised tree and remove phrasal categories i.e S-saw -> saw. Remove duplicated terminals. Continue to collapse chains of duplicates.\\
 \textbf{Viterbi} has runtime $O(Tn^2)$ for a sequence of $T$ words and $n$ tags. 
 
-\textbf{Dependecy Parsing}\\
+\subsection*{Dependecy Parsing}
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+\item Graph-based: starting from a fully connected graph of all possible edges between constituents, build the minimum spanning tree with the highest total score using edge-factored models. $O(n^2)$
+\item Transition-based: use a shift-reduce parser, training a classifier to decide which of the three possible actions to take in order to connect edges between words on the input buffer.\\
+\textit{Shift-reduce}: $O(n)$ projective only
+\item Conversion-based: starting from a lexicalised constituency parse of the sentence: remove the phrasal categories, remove the duplicated terminals, and collapse chains of duplicates.
+\end{itemize}
+
 \textit{Projective}
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/dependency-projective.png}
@@ -155,14 +184,7 @@ Non-projectivity is rare in english.\\
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/dependency-parse.png}
 \end{center}
-\underline{Dependency Parsing Algorithms}
-\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-    \item \textit{Adapted CKY}: $O(Kn^2)$
-    \item \textit{Graph Based}: $O(n^2)$
-    \item \textit{Shift-reduce}: $O(n)$ projective only
-\end{itemize}
-
-\textbf{Dependency Relations}
+\underline{Dependency Relations}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
 \item nsubj - nominal/noun subject
 \item dobj - direct object
@@ -171,10 +193,12 @@ Non-projectivity is rare in english.\\
 \item det - determiner
 \item conj - conjunction
 \end{itemize}
-\textbf{Shift-Reduce}
+
+\subsubsection*{Shift-Reduce}
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/shift-reduce.png}
 \end{center}
+
 \underline{Actions}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item \textit{Shift}: Put w1 on top of the stack.
@@ -214,19 +238,13 @@ Word relations:
     \item \textbf{Homonyms} Two words with the same form but different meanings with different origins. e.g. \textit{bank}
     \item \textbf{Regualr Polysemy} a word a multiple meanings and they are related and this can be predicted because there are other owrds with the saem pattern of meanings. e.g. \textit{orange, cherry}
 \end{itemize}
-\textbf{Open/Closed Words}\\
-
-\underline{Open class words} (content words): nouns, verbs, adverbs, adjectives. Mostly content-bearing: they refer to objects, actions, and features in the world. Open class: new ones are added all the time. \\
-
-\underline{Closed class words} (function words): pronouns, determiners, prepositions, connectives.\\
+\textbf{Open class words} (content words): nouns, verbs, adverbs, adjectives. Mostly content-bearing: they refer to objects, actions, and features in the world. Open class: new ones are added all the time. \\
+\textbf{Closed class words} (function words): pronouns, determiners, prepositions, connectives.\\
 Limited num of these. Mostly functional: to tie the concepts of a sentence together.
-
-
 
 \subsection*{Word Sense Disambiguation}
 This is a classification task. Given a word token in context, which sense (class) does it belong to? 
-
-We can use NB. If features are correlated we use LR. 
+We can use NB. If features are correlated we use LR. \\
 
 \textbf{Features for WSD}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
@@ -244,36 +262,34 @@ We can use NB. If features are correlated we use LR.
 \item Classifiers must be trained separately for each word\\
 – Hard to learn anything for infrequent or unseen words\\
 – Requires new annotations for each new word\\
-– Motivates unsupervised and semi-supervised methods\\
+– Motivates unsupervised and semi-supervised methods
 \end{itemize}
 
 \subsection*{Named Entity Recognition}
-Involves recognizing and classifying proper names in text.\\
-• NER systems typically use some form of feature-based sequence tagging, with features like capitalization being important.\\
-• Lists of known names called gazetteers are also important\\
-
+Involves recognizing and classifying proper names in text.
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+\item NER systems typically use some form of feature-based sequence tagging, with features like capitalization being important.
+\item Lists of known names called gazetteers are also important
+\end{itemize}
 Different datasets/named entity recognizers use different inventories of classes.\\
 
-\textbf{Types of Classes}\\
-– Smaller: person, organization, location, miscellaneous\\
-– Larger: sometimes also product, work of art, historical event, etc., as well as numeric value types (time, money, etc.)\\
+\subsubsection*{Types of Classes}
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+\item Smaller: person, organization, location, miscellaneous
+\item Larger: sometimes also product, work of art, historical event, etc., as well as numeric value types (time, money, etc.)\\
+\end{itemize}
 
 \subsection*{POS Tagging}
 Given a string, identify parts of speech.
-
-A first step towards syntactic analysis and has simpler models that are often faster than full parsing, but sometimes enough to be useful.
-
-POS tags can be useful features in text classification or word sense disambiguation. 
-
-Hard due to ambiguity and sparse data. The problem of finding the best tag sequence for a sentence is sometimes called
-decoding because, like spell correction etc, polysemy can also be viewed as a noisy channel model.
-
-Corpus annotators decide the num of parts of speech (English 40-100 tags). \\
-
-Morphologically rich languages often have compound morphosyntactic tags (Noun+A3sg+P2sg+Nom) predicting these requires more complex methods as there are loads of combos. 
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+\item A first step towards syntactic analysis and has simpler models that are often faster than full parsing, but sometimes enough to be useful.
+\item POS tags can be useful features in text classification or word sense disambiguation. 
+\item Hard due to ambiguity and sparse data. The problem of finding the best tag sequence for a sentence is sometimes called decoding because, like spell correction etc, polysemy can also be viewed as a noisy channel model.
+\item Corpus annotators decide the num of parts of speech (English 40-100 tags). 
+\item Morphologically rich languages often have compound morphosyntactic tags (Noun+A3sg+P2sg+Nom) predicting these requires more complex methods as there are loads of combos. 
+\end{itemize}
 
 \subsection*{Spelling Correction}
-
 \textbf{Noisy Channel Model} A message is communicated but noise is introduced and one must decode the noisy message.
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/noisy-channel.png}
@@ -286,12 +302,12 @@ In spelling correction:
 \end{itemize}
 Formally we want to calculate $\operatorname{argmax}_{y}P(x|y)$.
 Using Bayes' Rule we write
-$$\begin{aligned} 
+$\begin{aligned} 
     \underset{y}{\operatorname{argmax}} P(y \mid x) & =\underset{y}{\operatorname{argmax}} \frac{P(x \mid y) P(y)}{P(x)} \\ 
     & =\underset{y}{\operatorname{argmax}} P(x \mid y) P(y)
-\end{aligned}$$
+\end{aligned}$
 
-\textbf{Basic Spelling Corrction Model}
+\subsubsection*{Basic Spelling Corrction Model}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
 \item Correct each non-word $x_i$ by generating a list of all words $y_i$ that differ by 1 character from $x_i$.
 \item Compute $P(\vec{x} \mid \vec{y}) P(\vec{y})$ for each $\vec{y}$ 
@@ -313,8 +329,7 @@ $$
 $\mathrm{P}($ no $\mid$ not $)=\mathrm{P}(\mathrm{n} \mid \mathrm{n}) \mathrm{P}(\mathrm{o} \mid 0) \mathrm{P}(-\mid \mathrm{t})$
 To estimate $P\left(x_i \mid y_i\right)$, count how many times each character (including empty character for del/ins) was used in place of each other character-> confusion matrix. Use MLE or smoothing to estimate probs\\
 
-\textbf{Edit Distance}\\
-
+\subsubsection*{Edit Distance}
 All operations have $cost = 1$ apart from substitution between identical letters (unless specified otherwise).
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/edit.jpg}
@@ -328,16 +343,16 @@ All operations have $cost = 1$ apart from substitution between identical letters
     \item Named-entity recognition  
 \end{itemize}
 \textbf{Trigram equation}$$P_{M L E}\left(w_i \mid w_{i-2}, w_{i-1}\right)=\frac{C\left(w_{i-2}, w_{i-1}, w_i\right)}{C\left(w_{i-2}, w_{i-1}\right)}$$
+\textit{Start/end of sentence tags} and \textit{costs} are used. 
 
-\textit{Start/end of sentence tags} and \textit{costs} are used. \\
+\textbf{Markov Assumption} the probability of a word only depends of a fixed number $N$ of previous words. 
 
-\textbf{Markov Assumption} the probability of a word only depends of a fixed number $N$ of previous words. \\
+\textbf{Order} Higher order $N$-grams are more context-sensitive but suffer from sparsity, whereas lower order $N$-grams have reduced context but are less sparse.
 
-\textbf{Order} Higher order $N$-grams are more context-sensitive but suffer from sparsity, whereas lower order $N$-grams have reduced context but are less sparse.\\
+\textbf{MLE}$P_{M L E}(x)=\frac{C(x)}{\sum_{x^{\prime}} C\left(x^{\prime}\right)}$
 
-\textbf{MLE}$$P_{M L E}(x)=\frac{C(x)}{\sum_{x^{\prime}} C\left(x^{\prime}\right)}$$
-
-\textbf{Smoothing} reduces sparse data problem. Smoothing methods below assign equal prob to all unseen events if interpolation and back-off are not used.\\
+\subsubsection*{Smoothing} 
+reduces sparse data problem. Smoothing methods below assign equal prob to all unseen events if interpolation and back-off are not used.\\
 
 \textbf{Add-$\alpha$ (Lidstone) Smoothing}: Add $\alpha$ to all counts and normalise. 
 We choose $\alpha<1$ that minimises loss on the dev set. \\
@@ -385,26 +400,21 @@ $$
 
 \subsection*{Neural Language Models}
 Language modelling with NNs is just a classification problem, given a sequence of previous words, output a probability distribution over next possible words.\\
-
 Vector representation of a text has some dimensionality $d$ but in the end, we need a vector of size $|V|$. The linear layer we apply to the vector representation of the text must then have $|V|$ columns. Each column can be thought of as an \textit{output word embedding}. 
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/nn-lm.png}
 \end{center}
 
 \underline{Training NN LMs}\\
-
 We train using cross entropy loss against the one-hot vector of the correct token, giving the loss function
 $$\operatorname{Loss}\left(p^*, p\right)=-\log \left(p_{y_t}\right)=-\log \left(p\left(y_t \mid y_{<t}\right)\right)$$
 So for each token in a sequence we increase the weight of the correct\\ 
 
 \underline{Temperature}\\
-
 Choosing the most probable next word in each case leads to boring generations with mostly frequent words. 
-
 We divide the \textbf{SoftMax} by a temperature $\tau$ to make the distribution more uniform.
 
 $$softmax = \frac{\exp \left(\frac{h^T w}{\tau}\right)}{\sum_{w_i \in V} \exp \left(\frac{h^T w_i}{\tau}\right)}$$
-
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/diversity.png}
 \end{center}
@@ -412,96 +422,80 @@ $$softmax = \frac{\exp \left(\frac{h^T w}{\tau}\right)}{\sum_{w_i \in V} \exp \l
 \subsection*{Evaluation}
 \textbf{Extrinsic} measure the performance of a system using a downstream application.
 
-\textbf{Intrinsic} relies on measures inherent to the current task.\\
+\textbf{Intrinsic} relies on measures inherent to the current task.
 
-\textbf{Metrics for Binary Classification}\\
+\subsubsection*{Metrics for Binary Classification}
 ${accuracy}=\frac{correct}{total}=\frac{TP+TN}{TP+FP+TN+FN}$\\
 $\Uparrow$ doesn't work for imbalanced data i.e. mostly one class.\\
 ${precision}=\frac{\text{correct +ive tags}}{\text{total tagged}}=\frac{T P}{T P+F P}$\\
 ${recall}= \frac{\text{correct +ive tags}}{\text{total +ive data}}=\frac{\text{TP}}{\text{TP + FN}}$\\
 $F_1=\frac{2 \cdot P \cdot R}{P+R}$
 
-\textbf{Metrics for Multi Classification}
+\subsubsection{Metrics for Multi Classification}
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/confusion-matrix.png}
 \end{center}
-Combine precision and recall with micro and macro averaging.\\
+Combine precision and recall with micro and macro averaging.
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/micromacro-averaging.png}
 \end{center}
 
-\textbf{Entropy}
+\subsubsection*{Entropy}
 Measure of disorder. How many bits (y/n questions we need to find an outcome).
 $$H(X)=\sum_x-P(x) \log _2(P(x))$$
 
-\textbf{Cross-Entropy}
+\subsubsection*{Cross-Entropy}
 Let $P:=$ our model's probability distribution, $\hat{P}:=$ the true distribution.
 $$H(P, \hat{P})=\sum_x-P(x) \log _2 \hat{P}(x)$$
 $NB$: cross entropy $\geq$ entropy.\\
 For a \textit{word sequence} $w_1, \ldots, w_n$, with large $n$, per-word cross-entropy is well approximated by:
 $$H_M\left(w_1 \ldots w_n\right)=-\frac{1}{n} \log _2 P_M\left(w_1 \ldots w_n\right)$$
 
-\textbf{Perplexity} LM performance is often reported as perplexity rather than cross-entropy.$$2^\text{cross-entropy}$$
+\textbf{Perplexity}:=$2^\text{cross-entropy}$.  LM performance is often reported as perplexity rather than cross-entropy
 
-\textbf{Perplexity vs F-score}\\
+\subsubsection*{Perplexity vs F-score}
 F score allows you to relate the accuracy of the model to the training set (for comparisons with other models and general overview), Entropy/perplexity gives you insight into how the model operates (like the outline of how it reasons and makes decisions)\\
 
-\textbf{Bracket Score}
+\subsubsection*{Bracket Score}
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/bracket-score.png}
 \end{center}
-Used to evaluate statistical parsers against gold standard trees, use $F_1$.\\
+Used to evaluate statistical parsers against gold standard trees, use $F_1$.
 
-\textbf{Expectation Maximisation} 
+\subsubsection*{Expectation Maximisation} 
 initialise parameters to an arbitrary value then train a model,
 iteratively improve the parameters using newly trained model to 
 inform the parameter choice, repeate until there is no change. \\
-For the \textit{likelihood} function:\\
+\underline{Likelihood Function} is $P(data|\theta)$ for parameter $\theta$ of a probabilistic model.\\
 \textit{Hard EM} usually converges to the global min, always to the local min. \\
 \textit{True EM} always converges to the gloabl min. \\
 
-\underline{Likelihood Function} is $P(data|\theta)$ for parameter $\theta$ of a probabilistic model.
-
 \subsection*{Classisfication Models}
-\textbf{General Structure}\\
-
+\subsubsection*{General Structure}
 \underline{Feature Extractor}\\
 A feature extractor can be either manually defined (as in classical approaches) or learned (e.g., with neural networks).\\
 
 \underline{Classifier}\\
-A classifier assigns class probabilities given feature representation of a text. \\
+A classifier assigns class probabilities given feature representation of a text. 
 
-\textbf{Discriminative vs Genrative Models}\\
-\includegraphics*[width=0.32\textwidth]{media/models.png}
-
-\subsubsection*{Classical Models}
-\textbf{Naive Bayes} \\
-
-A generative model. \\
-
-Used for \underline{binary} text-classification. \\
-
+\subsubsection*{Naive Bayes}
+A generative model. Used for \underline{binary} text-classification. \\
 We make a \underline{naive assumption} that features are independent. \\
-
 Features are often just the words in a text. \\
 
 \underline{Classifier}\\
-
 Given a document with features $f_1, f_2, \ldots f_n$ and set of categories $C$, choose the class $\hat{c}$ where
 $$
 \hat{c}=\underset{c \in C}{\operatorname{argmax}} P(c) \prod_{i=1}^n P\left(f_i \mid c\right)
 $$
 $P(c)$ := prior probability of class $c$ before observing any data 
-(estimated with \underline{MLE})\\
+(estimated with \textbf{MLE})\\
+$P\left(f_i \mid c\right)$ := probability of seeing feature $f_i$ in class $c$ (estimated with MLE and lidstone smoothing).
 
-$P\left(f_i \mid c\right)$ := probability of seeing feature $f_i$ in class $c$ (estimated with MLE and lidstone smoothing).\\
-
-We often use costs: \\ 
-
+Or with costs: \\
 $\hat{c}=\underset{c \in C}{\operatorname{argmin}}\left(-\log P(c)+\sum_{i=1}^n-\log P\left(f_i \mid c\right)\right)$\\
 
 \underline{NB Derivation}\\
-
 Given document $d$ and set of categories $C$, we want to assign $d$ to the most probable category $\hat{c}$.
 $$
 \hat{c}=\underset{c \in C}{\operatorname{argmax}} P(c \mid d)
@@ -519,29 +513,25 @@ P(d \mid c)=P\left(f_1, f_2, \ldots f_n \mid c\right)
 $$
 We then make the naive Bayes assumption that features are conditionally independent given the class
 $$P\left(f_1, f_2, \ldots f_n \mid c\right) \approx P\left(f_1 \mid c\right) P\left(f_2 \mid c\right) \ldots P\left(f_n \mid c\right)$$
-Substitute this into $(*)$ to get the final equation.\\
+Substitute this into $(*)$ to get the final equation.
 
-\textbf{Logistic Regression} \\
-
+\subsubsection*{Logistic Regression} 
 A discriminative model. \\
 
 \underline{Feature Representation in LR}\\
-
 Our text is represented using manually chosen features $f=(f_1\dots,f_n)$ that we think will be helpful for identifying class distinctions.\\
-
 Each is a funtion of our obserbved data $\vec{x}$ (the contents of the text) and a class $c$.\\
-
 Each feature has a \underline{weight} $w_i$.\\
 
-\textit{Example features}:\\
-- $f_1$: contains('ski') $\&$ $c=1$ $\&$ $w_1=1.2$ \\
-- $f_4$: link\_to('expedia.com') $\&$ $c=1$ $\&$ $w_4=4.6$ \\
-- $f_9$: num\_links $\&$ $c=3$ $\&$ $w_9=-0.1$\\
+\textit{Example features}:
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
+    \item $f_1(\vec{x}, c)=1$ if 'ski' in $\vec{x}$ and $c=1$
+    \item $f_4(\vec{x}, c)=1$ if 'expedia.com' is linked to and $c=1$
+    \item $f_9(\vec{x}, c)=$ number of links in $\vec{x}$ and $c=3$
+\end{itemize}
 
 \underline{LR Classifier (SoftMax)}\\
-
 Unlike Naive Bayes, we model $P(c \mid d)$ directly.\\
-
 We choose the class with the highest probability according to \textbf{SoftMax}
 $$
 P(c \mid \vec{x})=\frac{\exp \left(\sum_i w_i f_i(\vec{x}, c)\right)}{\sum_{c^{\prime}} \exp \left(\sum_i w_i f_i\left(\vec{x}, c^{\prime}\right)\right)} 
@@ -549,20 +539,17 @@ $$
 This is equivalent to finding the class for which $\vec{w} \cdot \vec{f}$ is highest.\\
 
 \underline{Training}\\
-
 We need to determine which weights make the labels on our annotated data most probable.\\
 We use \textbf{Gradient Descent} to find the weights that minimise the \textbf{Cross-Entropy Loss} of our model.\\
 
 \underline{Cross-Entropy Loss for LR}\\
-
 The true distribution is a one-hot vector $P$, where $P_i=1$ if the class is $i$ and $0$ otherwise.\\
-The model distribution $\hat{P}$ is the output of SoftMax.\\
+The model distribution $\hat{P}$ is the output of SoftMax.
 
 Since the true distribution is one-hot, for a true class $k$ the cross-entropy loss simplifies to
 $$\operatorname{Loss}\left(P, \hat{P}\right)=-\log \left(\hat{P}_k\right)$$
 
 \underline{Gradient Descent}\\
-
 Randomly initialise the weight vector $\vec{w}$ and nudge it in the right direction using derivative of the loss function.
 $$
 \vec{w} \leftarrow \vec{w}+\eta \cdot \nabla_w \sum_{j=1}^N \log \left(P\left(c^{(j)} \mid x^{(j)}\right)\right)
@@ -570,7 +557,6 @@ $$
 $\eta$ := learning rate, a hyper parameter of the model. \\
 
 \underline{Mini-batch gradient descent}\\
-
 Like gradient descent but does not sum over all $\mathrm{N}$ on each iteration, only a batch $\mathrm{B}\subset\mathrm{N}$.\\
 
 \textbf{LR vs NB}
@@ -587,28 +573,23 @@ Like gradient descent but does not sum over all $\mathrm{N}$ on each iteration, 
 All neural network classifiers classify the same as LR, using \textbf{softmax}, we just have to use some $linear-layer$ to reduce the dimensionality of our text-representation vector to a vector representing our class distribution. \\
 The only difference from LR an clasical models is where the features come from. \\
 \includegraphics[width=0.35\textwidth]{media/nn-classifier.png}
-Generally, we pass the \textbf{Word Embeddings} of the tokens in a document to a NN so it can learn which features represented in the embeddings are relevant for classification. \\
+Generally, we pass the \textbf{Word Embeddings} of the tokens in a document to a NN so it can learn which features represented in the embeddings are relevant for classification. 
 
-\textbf{(Weighted) Bag of Embeddings}\\
-
+\subsubsection*{(Weighted) Bag of Embeddings}
 Represnt the text as a sum or weighted sum of the embeddings of the words in the text.\\
 Weighted sum could be calculated using $tf-idf$ (see LSA).\\
+This (along with NB) should act as a \textbf{baseline} for any NN, if our model cannot do better than this, it's not worth using NNs.
 
-This (along with NB) should act as a baseline for any NN, if our model cannot do better than this, it's not worth using NNs.\\ 
-
-\textbf{RNNs}\\
-
+\subsubsection*{RNNs}
 Reads a sequence of tokens.\\
 At each step we take an input vector (token embedding) and a previous state (which encodes all previous information) and compute a new state. 
 \begin{center}
 \includegraphics*[width=0.15\textwidth]{media/rnn-cell.png}
 \end{center}
 The RNN cell (the stuff doing the encoding) is the same at all steps.\\
-
 The output vector must be the last state - only this state saw all input tokens.\\  
 
 \underline{Vanilla RNN}\\
-
 Transforms $h_{t-1}$ and $x_t$ linearly then applies a non-linearity (e.g. $\tanh$) 
 \begin{center}
 \includegraphics*[width=0.25\textwidth]{media/vanilla-rnn.png}
@@ -616,7 +597,6 @@ Transforms $h_{t-1}$ and $x_t$ linearly then applies a non-linearity (e.g. $\tan
 \textit{Disadvantage}: suffer from vanishing and exploding gradients problem.\\
 
 \underline{Multi-layer RNNs}\\
-
 Stack multiple layers, inputs for the higher RNN are representations from the previous layer.\\
 
 The main hypothesis is that lower layers catch local phenomena (e.g., phrases), higher layers learn high-level things (e.g. topic).
@@ -626,7 +606,6 @@ The main hypothesis is that lower layers catch local phenomena (e.g., phrases), 
 \textit{Disadvantage}: the last state can easily "forget" earlier tokens.\\
 
 \underline{Bi-directional}\\
-
 To help with "remembering" earlier vectors we can use a \textit{forward} RNN that reads left to right and a \textit{backward} RNN that reads right to left.\\
 
 We combine the output vectors of both (sum, contatenate, etc.) 
@@ -635,12 +614,11 @@ We combine the output vectors of both (sum, contatenate, etc.)
 \end{center}
 
 \textit{Disadvantage:} when stacking a lot of layers, you can have a problem with
-propagating gradients from top to bottom through a deep network.
+propagating gradients from top to bottom through a deep network. 
+To mitigate, this we use \textit{Residual} or \textit{Highway} connections which add a block's input to its output.
 
-To mitigate, this we use \textit{Residual} or \textit{Highway} connections which add a block's input to its output.\\
-
-\textbf{Conv Nets}\\
-Conv nets are sued when we are looking for patterns in a text but don't care where they are (e.g. sentiment classification).\\
+\subsubsection*{Conv Nets}
+Conv nets are used when we are looking for patterns in a text but don't care where they are (e.g. sentiment classification).\\
 
 \underline{Step 1: Convolution}\\
 \begin{center}
@@ -655,13 +633,13 @@ $$F_i = u_i \times W$$
 Each column in $W$ corresponds to a feature or output channel.\\
 
 \underline{Step 2: Pooling}\\
+Polling layer summarises each of the $m$ features in some region.
 
-Polling layer summarises each of the $m$ features in some region.\\
+\textit{Max-pooling} takes the maximum of each feature.
 
-\textit{Max-pooling} takes the maximum of each feature.\\
-\textit{Mean-pooling} computes mean over each feature.\\
+\textit{Mean-pooling} computes mean over each feature.
 
-\textit{Pool size} controls how many convolutions we pool over, \textit{stride} size controls how "far apart" each pool is.\\
+\textit{Pool size} controls how many convolutions we pool over, \textit{stride} size controls how "far apart" each pool is.
 
 For text classification we usually use \textit{global-over-time pooling} which compresses the text into a single vector. \\
 
@@ -683,15 +661,13 @@ Useful for
 \end{itemize}
 
 \subsection*{Word Embeddings}
-
 A word embedding is a vector representation of a word, typically one where proximity in vector space correlates to a similarity in meaning.
-
-\textbf{Analogous Embeddings}\\
+\subsubsection*{Analogous Embeddings}
 For an analogy $a:b:: a^*: b^*$ ($a$ is to $b$ as $a^*$ is to $b^*$) we have 
 $$
 \overrightarrow{\mathrm{b}} *=\operatorname{argmin} \text { distance } \overrightarrow{\mathrm{x}}(\overrightarrow{\mathrm{x}}, \overrightarrow{\mathrm{b}}-\overrightarrow{\mathrm{a}}+\overrightarrow{\mathrm{a}} *)
 $$
-\textbf{Distance Metrics}
+\subsubsection*{Distance Metrics}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item \textit{Euclidean}: $E D(\vec{u}, \vec{v})=\sqrt{\sum_{i=1}^d\left(\vec{v}_i-\vec{u}_i\right)^2}$
     \item \textit{Cosine Similarity}: $\cos \left(\theta_{\vec{w} \vec{v}}\right)=\frac{\vec{v} \cdot \vec{w}}{|\vec{v}||\vec{w}|}$\\
@@ -705,9 +681,7 @@ However, for normalised vectors, they are related, as is illustrated below\\
 If $\vec{u}$ and $\vec{v}$ have length $1, E D(\vec{u}, \vec{v})^2=$ $2-2 \operatorname{dot}(\vec{u}, \vec{v})$.
 $$
 \begin{aligned}
-\cos \theta_{u, v} & =\frac{d o t(\vec{u}, \vec{v})}{\|\vec{u}\|\|\vec{v}\|} \\
 E D(\vec{u}, \vec{v}) & =\sqrt{\sum_{i=1}^d\left(\vec{v}_i-\vec{u}_i\right)^2} \\
-&=\sqrt{\sum_{i=1}^d\left(\vec{v}_i \vec{v}_i-2 \vec{v}_i \vec{u}_i+\vec{u}_i \vec{u}_i\right)}\\
 &=\sqrt{\sum_{i=1}^d \vec{v}_i \vec{v}_i+\sum_{i=1}^d \vec{u}_i \vec{u}_i-2 \sum_{i=1}^d \vec{v}_i \vec{u}_i} \\
 E D(\vec{u}, \vec{v})^2 & =\sum_{i=1}^d \vec{v}_i \vec{v}_i+\sum_{i=1}^d \vec{u}_i \vec{u}_i-2 \sum_{i=1}^d \vec{v}_i \vec{u}_i\\
 &=\|\vec{v}\|^2+\|\vec{u}\|^2-2 \operatorname{dot}(\vec{u}, \vec{v})\\
@@ -721,7 +695,7 @@ $$
 We have to put information about contexts into word vectors manually based on global corpus statistics.\\
 
 Two steps: 
-\begin{itemize}
+\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item construct a word-context matrix with a \underline{context} and a way of quantifying association between words and contexts, i.e. a formula for computing \underline{matrix elements}
     \item reduce its dimensionality with SVD
 \end{itemize}
@@ -731,26 +705,28 @@ Two steps:
 - smaller matrix allows for cheaper computation\\
 - a lot of words appear in only a few of possible contexts, SVD removes a lot of uninformative elements (e.g., zeros).\\
 
-\textbf{Co-occurence Counts} \\
+\subsubsection*{Co-occurence Counts} 
 \underline{Context}: surrounding words in a L-sized window\\
 \underline{Matrix element}: $N(w, c)$ - number of times word w appears in context c\\
 
-\textbf{Positive Pointwise Mutual Information (PPMI)}\\
+\subsubsection*{Positive Pointwise Mutual Information (PPMI)}
 \underline{Context}: surrounding words in a L-sized window\\
 \underline{Matrix element}: $PPMI(w, c)=\max (0, \mathrm{PMI}(\mathrm{w}, \mathrm{c}))$\\ where \\
 $\mathrm{PMI}(\mathrm{w}, \mathrm{c})=\log \frac{P(\mathrm{w}, \mathrm{c})}{P(\mathrm{w}) P(\mathrm{c})}=\log \frac{\mathrm{N}(\mathrm{w}, \mathrm{c})|(\mathrm{w}, \mathrm{c})|}{\mathrm{N}(\mathrm{w}) \mathrm{N}(\mathrm{c})}$\\
 
-\textbf{LSA} (Latent Semantic Analysis)\\ 
+\subsubsection*{LSA} (Latent Semantic Analysis)
 \underline{Context}: a full document $d$ from a collection of documents $D$\\
 \underline{Matrix element}: $tf-idf(w, d, D) = tf(w, d) \cdot idf(w, D)$
 $tf-idf$ is defiend\\
 - $tf(w, d)$: count of word $w$ in document $d$\\
 - $idf(w, D)$ := $\log \frac{|D|}{|\{d \in D: w \in d\}|}$(inverse document frequency)\\
 
-\subsubsection*{Prediction-based Methods}
-\textbf{Word2Vec} a collection of different models which convert words into their word embeddings. \\
+LSA is hard to scale even when we reduce its dimensionality.
 
-\textbf{Skip-gram} 
+\subsubsection*{Prediction-based Methods}
+\textbf{Word2Vec} is a collection of different models which convert words into their word embeddings. 
+
+\subsubsection*{Skip-gram} 
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/skipgram.png}
 \end{center}
@@ -760,9 +736,9 @@ $tf-idf$ is defiend\\
     \item for the central word, compute probabilities of context words;
     \item adjust the vectors to increase these probabilities (gradient descent).
 \end{itemize}
-\underline{Loss Function}\\
 
-We use the \textit{ average negative log liklelihood} of all of our preditions at each time step $t= 1\dots T$
+\underline{Loss Function}\\
+We use the \textit{average negative log liklelihood} of all of our preditions at each time step $t= 1\dots T$
 \includegraphics[width=0.35\textwidth]{media/skigram-loss.png}
 
 \underline{Calculating $P(w_{t+j}\mid w_t;\theta)$}\\
@@ -787,27 +763,20 @@ Samples are chosen from the unigram distribution of the corpus, often modified t
 For a particular central and context word, i.e. letting $J_{t,j} = -\log P(w{t+j}\mid w_t;\theta)$, we have
 \includegraphics[width=0.33\textwidth]{media/negative-sampling-loss.png}
 
-\textbf{Continuous Bag of Words (CBOW)} is another Word2Vec varient and predicts the central word from the sum of context vectors. This simple sum of word vectors is called "bag of words", which gives the name for the model.\\
+\textbf{Continuous Bag of Words (CBOW)} is another Word2Vec varient and predicts the central word from the sum of context vectors. This simple sum of word vectors is called "bag of words", which gives the name for the model.
 
-\textbf{Effect of Window Size}\\
+\subsubsection*{Effect of Window Size}
 Larger windows tend to produce more topical similarities \\
 - e.g. dog, bark, leash or walked, run, walking\\
 Smaller windows tend to produce more functional and syntactic similarities \\
 - e.g. Poodle, Pitbull, Rottweiler, or walking, running, approaching\\
 
-\textbf{Count Based vs Neural Embeddings}\\
-\begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-    \item LSA is hard to scale even when we reduce its dimensionality.
-\end{itemize}
 
 \subsection*{Sequence to Sequence}
-\underline{Encoder Decoder Framework}\\
-
-The \textit{encoder} processes the input text in the source language, 
+\subsubsection*{Encoder Decoder Framework}
+\underline{encoder} processes the input text in the source language, 
 understanding its grammar, vocabulary, and nuances. \\
-
-The \textit{decoder} generates the translated text 
-in the target language, given the translated text up 
+\underline{decoder} generates the translated text in the target language, given the translated text up 
 to that point and the vector representation of the input text. \\
 
 Having separate modules allows each to specialise and optimise for their respective languages. Also, separating the encoder and decoder adds flexibility to the machine translation system. \\
@@ -818,112 +787,94 @@ Having separate modules allows each to specialise and optimise for their respect
 \end{center}
 
 \underline{Training}\\
-
 Using cross entropy loss with the one-hot vector of the corect word as $p$. This gives a loss function
 $$\operatorname{Loss}\left(p^*, p\right)=-\log \left(p_{y_t}\right)=-\log \left(p\left(y_t \mid y_{<t}, x\right)\right)$$
 $x=\left(x_1, \ldots, x_m\right)$ := training input (source) sequence\\
 $y=\left(y_1, \ldots, y_n\right)$ := training target (output) sequence\\
 
-\underline{Greedy Decoding and Beam Search}\\
-
-\textit{Greedy Decoding}: At each step, pick the most probable token.\\
+\underline{Greedy Decoding}: At each step, pick the most probable token.\\
 This is a good baseline but inherintly flawed, the best token at the current step does not necessarily lead to the best sequence.\\
 
-\textit{Beam Search}: At each step, keep track of the $k$ most probable sequences.\\
+\underline{Beam Search}: At each step, keep track of the $k$ most probable sequences.\\
 Usually, the beam size is 4-10. Increasing beam size is computationally inefficient and leads to worse quality.
 \begin{center}
     \includegraphics[width=0.3\textwidth]{media/beam-search.png}
 \end{center}    
 
-\textbf{Encoder-Decoder Bottleneck}
-
+\subsubsection*{Encoder-Decoder Bottleneck}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
     \item for the encoder, it is hard to compress the sentence. It is likely to "forget" something. 
     \item for the decoder, different information may be relevant at different steps. The decoder sees only one representation of source.
 \end{itemize}
 
-\textbf{Attention}\\
+\subsubsection*{Attention}
+At different steps, let a model "focus" on different parts of the input.
 
-At different steps, let a model "focus" on different parts of the input.\\
+The encoder does not have to compress the whole source into a single vector - it gives representations for all source tokens (for example, all RNN states instead of the last one).
 
-The encoder does not have to compress the whole source into a single vector - it gives representations for all source tokens (for example, all RNN states instead of the last one).\\
 For each decoder step
-
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]
-\item receives attention input: a decoder state $h_t$ and all encoder states $s_1, s_2, \ldots, s_m$;\\
-\item computes attention scores: given one decoder state and one encoder state, returns a scalar value representing the "relevence" of the encoder state\\
- $h_t$. $\operatorname{score}\left(h_t, s_k\right), \mathrm{k}=1 . . \mathrm{m}$ it  $\operatorname{score}\left(h_t, s_k\right)$\\
+\item receives attention input: a decoder state $h_t$ and all encoder states $s_1, s_2, \ldots, s_m$;
+\item computes attention scores: given one decoder state and one encoder state, returns a scalar value representing the "relevence" of the encoder state
+ $h_t$. $\operatorname{score}\left(h_t, s_k\right), \mathrm{k}=1 . . \mathrm{m}$ it  $\operatorname{score}\left(h_t, s_k\right)$
 \item computes attention weights: apply \textbf{SoftMax} to attention scores
-\item computes attention output: weighted vector sum of encoder states with attention weights.\\
+\item computes attention output: weighted vector sum of encoder states with attention weights.
 \end{itemize}
 \begin{center}
-    \includegraphics[width=0.35\textwidth]{media/attention.png}
+    \includegraphics[width=0.32\textwidth]{media/attention.png}
 \end{center}
-
 \underline{Computing Attention}
 \begin{center}
-    \includegraphics[width=0.35\textwidth]{media/comp-attention.png}
+    \includegraphics[width=0.32\textwidth]{media/comp-attention.png}
 \end{center}
 
 \subsubsection*{Transformers}
-When encoding a sentence, RNNs won't understand it means until they read the whole sentence, and this can take a while for long sequences. \\\
+When encoding a sentence, RNNs won't understand it means until they read the whole sentence, and this can take a while for long sequences. 
 
 In contrast, in Transformers' encoder tokens interact with each other all at once. Exchanging information to try and understand each other. \\
 
 \underline{Self-Attention (Encoder)}\\
-
 Self-attention is that self-attention operates between representations of the same nature: e.g., all encoder states in some layer.
 \begin{center}
     \includegraphics[width=0.35\textwidth]{media/attention-eq.png}
 \end{center}
-\underline{Query, Key, and Value}\\
 
+\underline{Query, Key, and Value}\\
 Each encoder vector recieves three representations:
 \begin{center}
     \includegraphics[width=0.35\textwidth]{media/key-query-value.png}
 \end{center}
 
-\underline{Masked Self-Attention (Decoder)}
-
+\underline{Masked Self-Attention (Decoder)}\\
 Masking is the process of zeroing future vectors when conducting self-attention on the decoder vectors.\\
 
-\begin{center}
-    \includegraphics[width=0.35\textwidth]{media/masking.png}
-\end{center}
-
 \underline{Multi-Head Attention}\\
+Each word is part of varipus relations to other words.
 
-Each word is part of varipus relations to other words, 
-Multi-Head Attention allows a model to focus on multiple things simultaneously. 
+Multi-Head Attention allows a model to focus on multiple things \textbf{simultaneously}. 
 
 We use several heads and concatenate their outputs.
-\begin{center}
-    \includegraphics[width=0.35\textwidth]{media/multi-heaf.png}
-\end{center}
 
 \underline{A Complete Transformer}
 \begin{center}
     \includegraphics[width=0.35\textwidth]{media/transformer.png}
 \end{center}
 
+\textbf{Positional Encoding}\\
+When using absolute value positional encodings, there will be many training examples for the low order encodings and fewer as we go higher. This can lead to the higher encodings being poorly trained, and may result in poor generalization.
 \subsection*{Transfer Learning}
-Typically we don't have enough data to estimate an accurate model of the data for the target task.
+Typically we don't have enough data to estimate an accurate model.
 
-Transfer learning lets us learn from datasets designed for other tasks and apply that to the task at hand.
+Transfer learning lets us sue models trained on other datasets. 
 
-The training data for specific tasks is often labelled, and is rarely very large or particularly diverse. By comparison, the training data for word embeddings is just any form of text - e.g. wikipedia - which is far more diverse and is massive. When using pre-trained data we get a much more general knowledge base, which knows the relationships between words rather than being specifically trained to perform some task.
+The training data for specific tasks is often labelled, small and undiverse. \\
+The training data for word embeddings is any text and so is more diverse massive. 
+We can get a much more general knowledge base, which knows the relationships between words 
+rather than being specifically trained to perform some task.
 
-Although pre-trained data is often better than task specific data, it can struggle with domain specific tasks. To solve this we fine-tune the general pre-trained data with task specific knowledge from the specific data.
-
-Word embeddings encode word meanings without considering context, so they can't represent larger linguistic units (sentences, paragraphs, etc.). The target model therefore has to learn disambiguation and composition from limited taskspecific data.
-
-\underline{Downstream Usage}\\
+Can struggle with domain specific tasks so we can fine tune with task specific knowledge.
 
 Rather than using these learned embeddings as the input for a task specific model, models like GPT and BERT are themselves so general that no task specificity is needed.
 
-Models like BERT train using random alterations to their training data during each training step. In a given training step, $15 \%$ of the tokens are chosen to be randomly replaced.
-
-\subsection*{Misc.}
-\textbf{Costs :=} $-\log_2 P(x)$\\
 \end{multicols*}
 \end{document}
