@@ -152,16 +152,31 @@ Rule applications depend on past ancestors in the tree (not only parents).
 Improves accuracy.
 Example is of vertical order 2. 
 
+\begin{center}
+    \includegraphics*[width=0.3\textwidth]{media/markovisation.png}
+\end{center}
+
 \underline{Lexicalisation}\\
 Makes grammar more specific but grammar blows up + sparse data. Need to do complex smoothing or increasing emphasis on automatically learned subcategories. 
 
 \begin{center}
-    \includegraphics*[width=0.3\textwidth]{media/markovisation.png}
+    \includegraphics[width=0.2\textwidth]{media/lexicalisation.png}
+\end{center}
+\begin{center}
+    \includegraphics[width=0.1\textwidth]{media/collapse.png}
 \end{center}
 
 \underline{Lexicalised Constituency Parse}\\
 Take lexicalised tree and remove phrasal categories i.e S-saw -> saw. Remove duplicated terminals. Continue to collapse chains of duplicates.\\
 \textbf{Viterbi} has runtime $O(Tn^2)$ for a sequence of $T$ words and $n$ tags. 
+
+\textbf{Forward Algorithm}
+Transition probs: $\mathrm{a}_{\mathrm{ij}}=P\left(y^t=j \mid y^{t-1}=i\right), \mathrm{A}-[\mathrm{NxN}]$ matrix \\
+Emission probs: $\mathrm{b}_{\mathrm{ik}}=P\left(x^t=k \mid y^t=i\right), \mathrm{B}-[\mathrm{NxM}]$ matrix\\
+$x$ := corpus, $y$ := tags, $N$ := num tags, $M$ := num words\\
+Initialization: $\quad v_j^1=a_{S T A R T, j} b_{j, x^1}, \quad j=1, \ldots, N$\\
+Recomputation: $v_j^t=\left(\sum_i v_i^{t-1} a_{i j}\right) b_{j, x^t}, j=1, \ldots, N, t=2, \ldots,|x|$\\
+Final: $\quad v_{S T O P}^{|\mathbf{x}|+1}=\sum_i v_i^{|\mathbf{x}|} a_{i, S T O P}$
 
 \subsection*{Dependecy Parsing}
 \begin{itemize}[label=\textbullet, labelsep=0.3em, leftmargin=0.5em, itemsep=0em]

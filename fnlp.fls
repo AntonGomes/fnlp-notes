@@ -465,6 +465,19 @@ INPUT ./media/markovisation.png
 INPUT media/markovisation.png
 INPUT ./media/markovisation.png
 INPUT ./media/markovisation.png
+INPUT ./media/lexicalisation.png
+INPUT ./media/lexicalisation.png
+INPUT media/lexicalisation.png
+INPUT ./media/lexicalisation.png
+INPUT ./media/lexicalisation.png
+INPUT ./media/collapse.png
+INPUT ./media/collapse.png
+INPUT media/collapse.png
+INPUT ./media/collapse.png
+INPUT ./media/collapse.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
 INPUT ./media/dependency-projective.png
 INPUT ./media/dependency-projective.png
 INPUT media/dependency-projective.png
@@ -629,6 +642,7 @@ INPUT media/transformer.png
 INPUT ./media/transformer.png
 INPUT ./media/transformer.png
 INPUT fnlp.aux
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
